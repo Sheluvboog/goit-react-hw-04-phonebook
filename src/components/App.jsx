@@ -30,24 +30,9 @@ export const App = () => {
   };
 
   const addContact = ({ name, number }) => {
-    if (
-      contacts.some(
-        value => value.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-      )
-    ) {
-      alert(`${name} is alredy in contacts`);
-    } else {
-      setContacts(old => {
-        const list = [...old];
-
-        list.push({
-          id: nanoid(),
-          name: name,
-          number: number,
-        });
-        return list;
-      });
-    }
+     this.setState(prevState => {
+      return { contacts: [...prevState.contacts, {    id: nanoid(), name, number }] };
+    });
   };
 
   const filterFu = () => {
