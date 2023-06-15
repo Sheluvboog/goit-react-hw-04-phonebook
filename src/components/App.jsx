@@ -30,10 +30,19 @@ export const App = () => {
   };
 
   const addContact = ({ name, number }) => {
-     this.setState(prevState => {
-      return { contacts: [...prevState.contacts, {    id: nanoid(), name, number }] };
-    });
-  };
+  if (
+    contacts.some(
+      (value) => value.name.toLowerCase() === name.toLowerCase()
+    )
+  ) {
+    alert(`${name} is already in contacts`);
+  } else {
+    setContacts((prevContacts) => [
+      ...prevContacts,
+      { id: nanoid(), name, number }
+    ]);
+  }
+};
 
   const filterFu = () => {
     const filteredContacts = contacts.filter(
